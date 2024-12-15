@@ -36,5 +36,22 @@ Pour l'authentification par ID de client et secret de client, j'ai besoin d'acti
 ![image](https://github.com/user-attachments/assets/c5239e79-dc04-4b0d-8eb7-eb8f021b7f1d)<br><br>
 ![Screenshot 2024-12-02 095738](https://github.com/user-attachments/assets/2be19a8d-5e7b-4fc3-adf4-19a0be5d942a)<br><br>
 ## Partie 2:<br>
-Cette partie n'est pas documentée car elle n'est pas encore complètement terminée.
+### 1. Interface de connexion<br><br>
+![image](https://github.com/user-attachments/assets/ef4daba3-e9d2-42aa-adc0-8c5d0d8b75d2)<br><br>
+### 2. Interface d'inscription<br><br>
+![image](https://github.com/user-attachments/assets/13561747-27ff-4cba-97dd-f7e7b554c72e)<br><br>
+### 3. Page des produits<br><br>
+L'utilisateur doit avoir un accès administrateur pour accéder à cette page.<br><br>
+![image](https://github.com/user-attachments/assets/2424af74-35ac-441f-b89b-f02befa96725)<br><br>
+### 4. Page des commandes<br><br>
+L'utilisateur a seulement besoin d'un accès utilisateur pour accéder à cette page.<br><br>
+![image](https://github.com/user-attachments/assets/d5245ebb-de0c-4688-b97d-2b4638d71dc8)<br><br>
+### 5. Page des détails de la commande<br><br>
+L'utilisateur a seulement besoin d'un accès utilisateur pour accéder à cette page.<br><br>
+![image](https://github.com/user-attachments/assets/6d35736b-c6a5-4d66-a9b5-44c3bb7c8136)<br><br>
+
+
+
+
+
 
