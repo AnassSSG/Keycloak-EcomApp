@@ -1,23 +1,33 @@
-import {Component, OnInit} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import { Component, OnInit } from '@angular/core';
+import { ProductsService } from "../../services/products.service";
 
 @Component({
-  selector: 'app-products',
-  templateUrl: './products.component.html',
-  styleUrl: './products.component.css'
+    selector: 'app-products',
+    templateUrl: './products.component.html',
+    styleUrls: ['./products.component.css'],
+    standalone: false
 })
-export class ProductsComponent implements OnInit{
-  public  products : any;
-  constructor(private http : HttpClient) {
+export class ProductsComponent implements OnInit {
+  products: any[] = [];
+  isLoading = true;
+
+  constructor(private productService: ProductsService) {}
+
+  ngOnInit(): void {
+    this.fetchProducts();
   }
-  ngOnInit() {
-    this.http.get("http://localhost:8087/api/products").subscribe({
-      next : data => {
+
+  fetchProducts() {
+    this.productService.getProducts().subscribe({
+      next: (data) => {
         this.products = data;
+        this.isLoading = false;
       },
-      error : err => {
-        console.log(err);
-      }
-    })
+      error: (err) => {
+        console.error('Error fetching products:', err);
+        this.isLoading = false;
+      },
+    });
   }
+
 }

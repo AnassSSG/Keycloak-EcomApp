@@ -1,26 +1,54 @@
-<div class="p-3">
-  <div class="card">
-    <div class="card-header">Orders</div>
-    <div class="card-body">
-      <h2>Orders</h2>
-      <table class="table">
-        <thead>
-        <tr>
-          <th>ID</th> <th>Date</th> <th>State</th> <th>Products Count</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let o of orders">
-          <td>{{o.id}}</td>
-          <td>{{o.date}}</td>
-          <td>{{o.state}}</td>
-          <td>{{o.productItems.length}}</td>
-          <td>
-            <button class="btn btn-success" (click)="getOrderDetails(o)">Order Details</button>
-          </td>
-        </tr>
-        </tbody>
-      </table>
+<div class="container mt-5">
+  <!-- Page Title -->
+  <h2 class="text-center text-uppercase text-dark fw-bold mb-4">Orders List</h2>
+
+  <!-- Loading Indicator -->
+  <div *ngIf="isLoading" class="text-center my-5">
+    <div class="spinner-border text-secondary" role="status">
+      <span class="visually-hidden">Loading...</span>
     </div>
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="alert alert-danger text-center my-3 shadow-sm">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Orders Table -->
+  <div class="table-responsive" *ngIf="!isLoading && !errorMessage && orders.length > 0">
+    <table class="table table-bordered table-hover align-middle">
+      <thead class="bg-dark text-light">
+      <tr>
+        <th>Order #ID</th>
+        <th>Date</th>
+        <th>State</th>
+        <th>Items Count</th>
+        <th class="text-center">Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let order of orders; let i = index" class="align-middle">
+        <td>{{ order.id }}</td>
+        <td>{{ order.date }}</td>
+        <td>
+            <span class="badge border border-secondary text-dark">
+              {{ order.state }}
+            </span>
+        </td>
+
+        <td class="text-center">{{ order.productItems?.length || 0 }}</td>
+        <td class="text-center">
+          <button class="btn btn-primary btn-sm" (click)="viewOrderDetails(order.id)">
+            <i class="bi bi-eye"></i> View
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- No Orders Found -->
+  <div *ngIf="!isLoading && !errorMessage && orders.length === 0" class="text-center my-5">
+    <p class="text-muted fs-5">No orders available.</p>
   </div>
 </div>

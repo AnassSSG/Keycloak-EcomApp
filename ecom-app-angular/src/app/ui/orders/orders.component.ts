@@ -1,29 +1,41 @@
-import {Component, OnInit} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Router} from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { OrdersService } from '../../services/orders.service';
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-orders',
   templateUrl: './orders.component.html',
-  styleUrl: './orders.component.css'
+  styleUrls: ['./orders.component.css']
 })
-export class OrdersComponent implements OnInit{
-  public orders : any;
+export class OrdersComponent implements OnInit {
+  orders: any[] = [];
+  isLoading: boolean = true;
+  errorMessage: string | null = null;
 
-  constructor(private http : HttpClient, private router : Router) {
- }
- ngOnInit() {
-   this.http.get("http://localhost:8088/api/orders").subscribe({
-     next : orders => {
-       this.orders = orders;
-     },
-     error : err => {
-       console.log(err);
-     }
-   })
- }
+  constructor(private ordersService: OrdersService, private router: Router) {}
 
-  getOrderDetails(o:any) {
-    this.router.navigateByUrl("/order-details/"+o.id);
+  ngOnInit(): void {
+    this.fetchOrders();
+  }
+
+  fetchOrders(): void {
+    this.isLoading = true;
+    this.errorMessage = null;
+
+    this.ordersService.getOrders().subscribe({
+      next: (response) => {
+        this.orders = response;
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.error('There was an error fetching orders!', error);
+        this.errorMessage = 'Failed to load orders. Please try again later.';
+        this.isLoading = false;
+      }
+    });
+  }
+
+  viewOrderDetails(orderId: string): void {
+    this.router.navigateByUrl(`/orders/${orderId}`);
   }
 }

@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+//@CrossOrigin("*")
 public class ProductRestController {
     private ProductRepository productRepository;
 
@@ -16,10 +17,12 @@ public class ProductRestController {
         this.productRepository = productRepository;
     }
     @GetMapping("/products")
+    //@PreAuthorize("hasAuthority('ADMIN')")
     public List<Product> productList(){
         return productRepository.findAll();
     }
     @GetMapping("/products/{id}")
+    //@PreAuthorize("hasAuthority('ADMIN')")
     public Product productById(@PathVariable String id){
         return productRepository.findById(id).get();
     }
